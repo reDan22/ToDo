@@ -1,0 +1,49 @@
+@startuml TO-BE
+!theme plain
+skinparam backgroundColor white
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor #446B44
+skinparam ActivityDiamondBackgroundColor #D8E8D8
+skinparam ActivityDiamondBorderColor #446B44
+skinparam ArrowColor #444444
+skinparam PartitionBorderColor #7787A8
+skinparam DefaultFontName Helvetica
+
+title TO-BE: автоматический анализ через CryptoSentinel
+
+|#F4F6FA|Источники|
+start
+:CryptoPanic API /\n5 RSS-лент /\nTelegram-каналы /\nFree Crypto News;
+
+|#E5F0E5|CryptoSentinel (автомат 24/7)|
+:Асинхронный параллельный\nпарсинг 4 источников\n~2 сек;
+:Дедупликация по MD5-хешу\nзаголовка (<100 мс);
+:FinBERT-инференс пакетом 32 шт.\nна GPU RTX 3060 (~1-2 сек);
+:Взвешенная агрегация\nS = Σ v·w_src·w_time·c /\nΣ w_src·w_time·c;
+
+if (S vs ±0.2) then (S > +0.2)
+  :BULLISH «рост вероятен»;
+elseif (S < -0.2) then
+  :BEARISH «падение вероятно»;
+else (между)
+  :NEUTRAL;
+endif
+
+|#FFF4E8|Инвестор|
+:Видит на дашборде:\nцвет светофора + S + reasoning;
+:Принимает решение:\nlong / short / ничего;
+
+|#E8EFFA|Биржа|
+:Открывает позицию;
+
+note right
+  **Метрики TO-BE:**
+  Время «новость → ордер»: 30-90 сек
+  Пропущенных новостей: 0% (24/7)
+  Оценка: количественная
+  Каждое решение логируется
+end note
+
+stop
+
+@enduml

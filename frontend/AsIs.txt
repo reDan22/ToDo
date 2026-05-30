@@ -1,0 +1,64 @@
+@startuml AS-IS
+!theme plain
+skinparam backgroundColor white
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor #C8862E
+skinparam ActivityDiamondBackgroundColor #FFE6B8
+skinparam ActivityDiamondBorderColor #C8862E
+skinparam ArrowColor #444444
+skinparam PartitionBorderColor #7787A8
+skinparam DefaultFontName Helvetica
+
+title AS-IS: ручной процесс анализа криптоновостей инвестором
+
+|#F4F6FA|Источники (мониторятся вручную)|
+start
+:Telegram-каналы / Twitter \nCoinDesk / Reddit\nпубликуют новость;
+
+|#FFF4E8|Инвестор|
+:Видит уведомление\nили заходит в ленту;
+
+if (Занят?) then (да, часто)
+  #FBE3E3:Пропускает новость;
+  stop
+else (нет)
+endif
+
+:Читает заголовок;
+:Сверяет с несколькими\nисточниками вручную\n(5-10 мин);
+:Оценивает тональность\nна глазок;
+
+if (Помнит контекст?\nхалвинг / ETF / FOMC) then (нет)
+  :Гуглит и читает\nсопутствующие материалы\n(15-30 мин);
+else (да)
+endif
+
+:Открывает биржу,\nсмотрит график цены;
+
+if (Эмоции: FOMO / страх?) then (да)
+  #FBE3E3:Колеблется,\nоткладывает решение;
+  #FBE3E3:Окно возможностей закрылось;
+  stop
+else (нет)
+endif
+
+:Решает: long / short / ничего;
+
+|#E8EFFA|Биржа|
+:Открывает позицию вручную;
+
+if (Цена уже двинулась?) then (часто)
+  #FBE3E3:Поздний вход,\nхудшая цена;
+else (нет)
+endif
+
+note right
+  **Метрики AS-IS:**
+  Время «новость → ордер»: 25-60 мин
+  Пропущенных новостей: 60-80%
+  Оценка: субъективная
+end note
+
+stop
+
+@enduml
