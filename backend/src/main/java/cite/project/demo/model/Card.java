@@ -25,7 +25,6 @@ public class Card {
     @Column(name="image_url")
     private String imageUrl;
 
-    @ForeignKey
     @Column(name="user_id")
     private Long userId;
 
