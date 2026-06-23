@@ -3,6 +3,8 @@ package cite.project.demo.DTO;
 import cite.project.demo.enums.StatusEnum;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.Size;
 

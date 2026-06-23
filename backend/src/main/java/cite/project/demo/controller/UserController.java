@@ -12,7 +12,7 @@ import java.util.List;
 // Сделать lombok, liquidbase
 
 @RestController
-@RequestMapping(value = "/api/cards")
+@RequestMapping(value = "/api/clients")
 @RequiredArgsConstructor
 public class UserController {
 

@@ -1,4 +1,42 @@
 package cite.project.demo.service;
 
+import cite.project.demo.CardDTO.CreateCardDTO;
+import cite.project.demo.model.Card;
+import cite.project.demo.repository.CardRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
 public class CardService {
+
+    private final CardRepository cardRepository;
+
+    //Создание новой карточки
+    public Card createCard(CreateCardDTO cardDTO){
+        Card card = new Card();
+        card.setTitle(cardDTO.getTitle());
+        card.setDescription(cardDTO.getDescription());
+        card.setImageUrl(cardDTO.getImageUrl());
+        //TODO: заменить на реальный id пользователя
+        card.setUserId(1L);
+
+
+        return cardRepository.save(card);
+    }
+
+    //Получение карточки по id
+
+    public Card getCard(Long id){
+        return cardRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Карточка с ID:" + id + "не найдена!"));
+    }
+
+    public List<Card> getAllCards(){
+        return cardRepository.findAll();
+    }
+
 }
