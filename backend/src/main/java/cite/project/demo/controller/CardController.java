@@ -32,4 +32,10 @@ public class CardController {
         return cardService.createCard(createCardDTO);
     }
 
+    @DeleteMapping(value = "/{id}")
+    public void deleteCard(@PathVariable Long id){
+        cardService.deleteCard(id);
+    }
+
+
 }

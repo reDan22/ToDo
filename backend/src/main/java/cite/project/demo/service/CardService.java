@@ -6,6 +6,8 @@ import cite.project.demo.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -22,6 +24,7 @@ public class CardService {
         card.setTitle(cardDTO.getTitle());
         card.setDescription(cardDTO.getDescription());
         card.setImageUrl(cardDTO.getImageUrl());
+        card.setNextCardId(cardDTO.getNextCardId());
         //TODO: заменить на реальный id пользователя
         card.setUserId(1L);
 
@@ -35,8 +38,21 @@ public class CardService {
         return cardRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Карточка с ID:" + id + "не найдена!"));
     }
 
+    //Получение всех карточек
     public List<Card> getAllCards(){
         return cardRepository.findAll();
+    }
+
+    @Transactional
+    public void deleteCard(Long id) {
+        if (cardRepository.existsById(id)){
+            cardRepository.deleteById(id);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Карточки с ID: " + id + " не существует");
+        }
+
+
     }
 
 }

@@ -1,17 +1,14 @@
 package cite.project.demo.CardDTO;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
+@Data
 @AllArgsConstructor
-@Getter
-@Setter
 public class CreateCardDTO {
 
 
@@ -22,5 +19,5 @@ public class CreateCardDTO {
 
     private String imageUrl;
 
-
+    private Long nextCardId;
 }

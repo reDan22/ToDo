@@ -8,6 +8,7 @@
     <include file="db/changelog/changes/001-create-client-account.sql"/>
     <include file="db/changelog/changes/002-create-cards.sql"/>
     <include file="db/changelog/changes/003-cards-add-column-description.sql"/>
+    <include file="db/changelog/changes/004-cards-add-column-next_card_id.sql"/>
 
 
 </databaseChangeLog>

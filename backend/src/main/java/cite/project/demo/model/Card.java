@@ -44,5 +44,7 @@ public class Card {
     @Column(name = "modify_dttm", nullable = false)
     private OffsetDateTime modifyDttm;
 
+    @Column(name = "next_card_id")
+    private Long nextCardId;
 
 }

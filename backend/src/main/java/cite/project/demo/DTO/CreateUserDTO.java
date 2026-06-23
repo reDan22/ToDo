@@ -1,5 +1,6 @@
 package cite.project.demo.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Data
+@AllArgsConstructor
 public class CreateUserDTO {
 
     @NotBlank(message = "ФИО не должно быть пустым")
