@@ -1,8 +1,8 @@
 package cite.project.demo.service;
 
-import cite.project.demo.CardDTO.CreateCardDTO;
-import cite.project.demo.CardDTO.PatchCardDTO;
-import cite.project.demo.CardDTO.UpdateCardDTO;
+import cite.project.demo.DTO.CreateCardDTO;
+import cite.project.demo.DTO.PatchCardDTO;
+import cite.project.demo.DTO.UpdateCardDTO;
 import cite.project.demo.model.Card;
 import cite.project.demo.repository.CardRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package cite.project.demo.CardDTO;
+package cite.project.demo.DTO;
 
 
 import lombok.AllArgsConstructor;
