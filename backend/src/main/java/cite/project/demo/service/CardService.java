@@ -1,13 +1,14 @@
 package cite.project.demo.service;
 
 import cite.project.demo.CardDTO.CreateCardDTO;
+import cite.project.demo.CardDTO.PatchCardDTO;
+import cite.project.demo.CardDTO.UpdateCardDTO;
 import cite.project.demo.model.Card;
 import cite.project.demo.repository.CardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -54,5 +55,43 @@ public class CardService {
 
 
     }
+
+    @Transactional
+    public Card modifyCard(Long id, PatchCardDTO patchCardDTO){
+        Card modifiedCard =  cardRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+        );
+        if (patchCardDTO.getTitle().isPresent()) {
+            modifiedCard.setTitle(patchCardDTO.getTitle().get());
+        }
+        if (patchCardDTO.getDescription().isPresent()) {
+            modifiedCard.setDescription(patchCardDTO.getDescription().get());
+        }
+        if (patchCardDTO.getImageUrl().isPresent()) {
+            modifiedCard.setImageUrl(patchCardDTO.getImageUrl().get());
+        }
+        if (patchCardDTO.getNextCardId().isPresent()) {
+            modifiedCard.setNextCardId(patchCardDTO.getNextCardId().get());
+        }
+
+        return cardRepository.save(modifiedCard);
+
+    }
+
+    @Transactional
+    public Card replaceCard(Long id, UpdateCardDTO updateCardDTO){
+
+        Card modifiedCard = cardRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
+        );
+        modifiedCard.setTitle(updateCardDTO.getTitle());
+        modifiedCard.setDescription(updateCardDTO.getDescription());
+        modifiedCard.setImageUrl(updateCardDTO.getImageUrl());
+        modifiedCard.setNextCardId(updateCardDTO.getNextCardId());
+
+
+        return cardRepository.save(modifiedCard);
+    }
+
 
 }

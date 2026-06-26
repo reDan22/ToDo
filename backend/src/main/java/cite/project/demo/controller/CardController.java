@@ -1,6 +1,8 @@
 package cite.project.demo.controller;
 
 import cite.project.demo.CardDTO.CreateCardDTO;
+import cite.project.demo.CardDTO.PatchCardDTO;
+import cite.project.demo.CardDTO.UpdateCardDTO;
 import cite.project.demo.model.Card;
 import cite.project.demo.service.CardService;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +37,16 @@ public class CardController {
     @DeleteMapping(value = "/{id}")
     public void deleteCard(@PathVariable Long id){
         cardService.deleteCard(id);
+    }
+
+    @PatchMapping(value = "/{id}")
+    public Card modifyCard(@PathVariable Long id, @Valid @RequestBody PatchCardDTO patchCardDTO){
+        return cardService.modifyCard(id, patchCardDTO);
+    }
+
+    @PutMapping(value = "/{id}")
+    public Card replaceCard(@PathVariable Long id, @Valid @RequestBody UpdateCardDTO updateCardDTO){
+        return cardService.replaceCard(id, updateCardDTO);
     }
 
 
